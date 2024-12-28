@@ -17,7 +17,7 @@ import org.rev317.min.api.methods.Skill;
 import java.awt.*;
 import java.util.ArrayList;
 
-@ScriptManifest(author = "RedSparr0w & Dark98", category = Category.OTHER, description = "ParaScript", name = "ParaScript", servers = { "2006rebotted" }, version = 1.3)
+@ScriptManifest(author = "RedSparr0w & Dark98", category = Category.OTHER, description = "ParaScript", name = "ParaScript", servers = { "2006rebotted" }, version = 1.4)
 public class Main extends Script implements MessageListener, Paintable {
 
     private final ArrayList<Strategy> strategies = new ArrayList<Strategy>();
@@ -46,11 +46,13 @@ public class Main extends Script implements MessageListener, Paintable {
         if(Variables.skill_to_train == Skill.WOODCUTTING) {
             strategies.add(new Fletch());
             strategies.add(new WoodcutTree());
+            strategies.add(new Bank());
+            strategies.add(new Walk());
         }
         if(Variables.skill_to_train == Skill.MINING) {
             strategies.add(new Mine());
-            // strategies.add(new Bank());
-            // strategies.add(new Walk());
+            strategies.add(new Bank());
+            strategies.add(new Walk());
         }
         // if(Variables.skill_to_train == Skill.SMITHING) {
         //     strategies.add(new Smelt());
@@ -69,10 +71,13 @@ public class Main extends Script implements MessageListener, Paintable {
             strategies.add(new FightingReturnToCoords());
             strategies.add(new LoadCannon());
             strategies.add(new Fighting());
-            // strategies.add(new Bank());
-            // strategies.add(new Walk());
+            //In order to implement banking for combat training, we would need to add something like a combat_method dropdown for bank, or something like a checkbox for banking items
+            //strategies.add(new Bank());
+            //strategies.add(new Walk());
         }
         if(Variables.skill_to_train == Skill.FISHING) {
+            strategies.add(new Bank());
+            strategies.add(new Walk());
             strategies.add(new Fish());
         }
         if(Variables.skill_to_train == null) {

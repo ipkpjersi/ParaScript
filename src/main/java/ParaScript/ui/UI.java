@@ -198,8 +198,8 @@ public class UI extends JFrame {
         woodcuttingPanel.add(lblWoodcuttingMethod);
         woodcuttingMethod.setModel(new DefaultComboBoxModel(new String[]{
                 "Fletch",
-                // "Bank",
                 "Drop",
+                "Bank",
         }));
         woodcuttingMethod.setBounds(20, 80, 150, 20);
         woodcuttingMethod.addActionListener (new ActionListener () {
@@ -279,8 +279,8 @@ public class UI extends JFrame {
         lblMiningMethod.setBounds(20, 60, 150, 20);
         miningPanel.add(lblMiningMethod);
         miningMethod.setModel(new DefaultComboBoxModel(new String[]{
-                // "Bank",
                 "Drop",
+                "Bank",
         }));
         miningMethod.setBounds(20, 80, 150, 20);
         miningMethod.addActionListener (new ActionListener () {
@@ -658,6 +658,7 @@ public class UI extends JFrame {
         fishingPanel.add(lblFishingMethod);
         fishingMethod.setModel(new DefaultComboBoxModel(new String[]{
                 "Drop",
+                "Bank"
         }));
         fishingMethod.setBounds(20, 80, 150, 20);
         fishingMethod.addActionListener (new ActionListener () {

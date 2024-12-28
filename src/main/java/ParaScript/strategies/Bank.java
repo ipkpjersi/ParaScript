@@ -35,7 +35,7 @@ public class Bank implements Strategy {
         }
 
         // Try find a nearby bank booth/chest
-        SceneObject bank_booth = SceneObjects.getClosest(11338, 2214, 3045, 5276, 6084, 11758, 14367, 4483, 3194, 10517, 2213);
+        SceneObject bank_booth = SceneObjects.getClosest(11338, 3045, 5276, 6084, 11758, 14367, 4483, 3194, 10517, 2213);
         if (bank_booth != null) {
             bank_booth.interact(SceneObjects.Option.USE_QUICKLY);
             Time.sleep(() -> isBankOpen(), 10000);
@@ -88,6 +88,9 @@ public class Bank implements Strategy {
                 }
                 Time.sleep(200);
             }
+            closeBank();
+            Time.sleep(200);
+            Variables.setStatus("none");
         } catch (Exception err){
             System.out.println("Banking error: ¯\\_(ツ)_/¯");
         }
@@ -123,20 +126,24 @@ public class Bank implements Strategy {
         switch(amount){
             case 1:
                 Menu.sendAction(632, item_id, slot, 5064, 6);
-                return;
+                break;
             case 5:
                 Menu.sendAction(78, item_id, slot, 5064, 5);
-                return;
+                break;
             case 10:
                 Menu.sendAction(867, item_id, slot, 5064, 4);
-                return;
+                break;
             case -1: // all
                 Menu.sendAction(431, item_id, slot, 5064, 3);
-                return;
+                break;
             default: // x
                 Menu.sendAction(53, item_id, slot, 5064, 2);
-                return;
+                break;
         }
+        Time.sleep(200);
+        closeBank();
+        Time.sleep(200);
+        Variables.setStatus("none");
     }
 
     public static void closeBank(){
