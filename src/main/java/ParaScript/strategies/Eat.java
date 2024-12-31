@@ -11,10 +11,15 @@ public class Eat implements Strategy {
     @Override
     public boolean activate() {
         currentHealth = Players.getMyPlayer().getHealth();
+
+        String mode = Variables.getEatingMode();
+        int foodHeals = mode.equals("Thieving") ? Variables.thieving_food_heals_amount : Variables.fighting_food_heals_amount;
+        int foodToEat = mode.equals("Thieving") ? Variables.thieving_food_to_eat : Variables.fighting_food_to_eat;
+
         if (Variables.running
-                && hasRequiredItems()
+                && hasRequiredItems(foodToEat)
                 && currentHealth > 0
-                && currentHealth <= (Skill.HITPOINTS.getRealLevel() - Variables.fighting_food_heals_amount)
+                && currentHealth <= (Skill.HITPOINTS.getRealLevel() - foodHeals)
         ) {
             Variables.setStatus("eating food");
             return true;
@@ -25,8 +30,11 @@ public class Eat implements Strategy {
 
     @Override
     public void execute() {
+        String mode = Variables.getEatingMode();
+        int foodToEat = mode.equals("Thieving") ? Variables.thieving_food_to_eat : Variables.fighting_food_to_eat;
+
         try {
-            Inventory.getItem(Variables.fighting_food_to_eat + 1).interact(Items.Option.CONSUME);
+            Inventory.getItem(foodToEat + 1).interact(Items.Option.CONSUME);
             Time.sleep(() -> Players.getMyPlayer().getHealth() != currentHealth, 5000);
             Variables.setStatus("none");
         } catch (Exception ಠ_ಠ) {
@@ -34,7 +42,7 @@ public class Eat implements Strategy {
         }
     }
 
-    private boolean hasRequiredItems(){
-        return Inventory.getItem(Variables.fighting_food_to_eat + 1) != null;
+    private boolean hasRequiredItems(int foodToEat) {
+        return Inventory.getItem(foodToEat + 1) != null;
     }
 }

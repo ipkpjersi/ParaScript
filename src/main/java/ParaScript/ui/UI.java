@@ -53,6 +53,9 @@ public class UI extends JFrame {
     private JLabel lblThievingNpcCustomID = new JLabel("Custom NPC IDs");
     private JTextField thievingNpcCustomID = new JTextField();
     private JComboBox thievingMethod = new JComboBox();
+    private JTextField thievingMinimumHitpoints = new JTextField();
+    private JTextField thievingFoodToEat = new JTextField();
+    private JTextField thievingFoodHealsAmount = new JTextField();
 
     // Fishing
     private JComboBox fishingTypeSelect = new JComboBox();
@@ -622,6 +625,52 @@ public class UI extends JFrame {
             }
         });
         thievingPanel.add(thievingMethod);
+        
+        // Food ID to eat while thieving
+        JLabel lblThievingFoodToEat = new JLabel("Food ID to eat");
+        lblThievingFoodToEat.setForeground(Color_WhiteSmoke);
+        lblThievingFoodToEat.setBounds(20, 120, 150, 20);
+        thievingPanel.add(lblThievingFoodToEat);
+        thievingFoodToEat.setBounds(20, 140, 150, 20);
+        thievingFoodToEat.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                // No action needed here
+            }
+        
+            @Override
+            public void focusLost(FocusEvent e) {
+                try {
+                    Variables.thieving_food_to_eat = Integer.parseInt(thievingFoodToEat.getText());
+                } catch (Exception ಠ_ಠ) {
+                    Variables.thieving_food_to_eat = -1; // Default or fallback value
+                }
+            }
+        });
+        thievingPanel.add(thievingFoodToEat);
+        
+        // How much the food heals
+        JLabel lblThievingFoodHealsAmount = new JLabel("Food heals amount");
+        lblThievingFoodHealsAmount.setForeground(Color_WhiteSmoke);
+        lblThievingFoodHealsAmount.setBounds(200, 120, 150, 20);
+        thievingPanel.add(lblThievingFoodHealsAmount);
+        thievingFoodHealsAmount.setBounds(200, 140, 150, 20);
+        thievingFoodHealsAmount.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                // No action needed here
+            }
+        
+            @Override
+            public void focusLost(FocusEvent e) {
+                try {
+                    Variables.thieving_food_heals_amount = Integer.parseInt(thievingFoodHealsAmount.getText());
+                } catch (Exception ಠ_ಠ) {
+                    Variables.thieving_food_heals_amount = 20; // Default or fallback value
+                }
+            }
+        });
+        thievingPanel.add(thievingFoodHealsAmount);
 
         /*
          * Fishing Panel

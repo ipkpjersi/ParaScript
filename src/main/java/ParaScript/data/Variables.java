@@ -49,6 +49,8 @@ public class Variables {
     // Thieving
     public static ThievingNpcs thieving_npc_selected = ThievingNpcs.MAN_WOMAN;
     public static String thieving_method = "Drop";
+    public static int thieving_food_to_eat = -1;
+    public static int thieving_food_heals_amount = 20;
 
     // Fishing
     public static FishingSpots fishing_spot_selected = FishingSpots.NET;
@@ -244,6 +246,19 @@ public class Variables {
                 return Variables.fighting_bury_bones;
             default:
                 return false;
+        }
+    }
+    
+    public static String getEatingMode() {
+        if (skill_to_train == null) return "Attack";
+
+        switch (skill_to_train.getName()) {
+            case "Thieving":
+                return "Thieving";
+            case "Attack":
+                return "Attack";
+            default:
+                return "Attack";
         }
     }
 }

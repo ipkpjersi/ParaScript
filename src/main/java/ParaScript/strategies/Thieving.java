@@ -21,6 +21,12 @@ public class Thieving implements Strategy {
                 && !Players.getMyPlayer().isInCombat()
                 && Players.getMyPlayer().getAnimation() == -1
                 && !Inventory.isFull()) {
+                if (!hasRequiredFood()) {
+                    //Uncomment for testing, but it's very spammy.
+                    //System.out.println("Out of food, exiting thieving");
+                    Variables.setStatus("none");
+                    return false;
+                }
             Variables.setStatus("thieving");
             return true;
         }
@@ -46,5 +52,8 @@ public class Thieving implements Strategy {
             }
         } catch (Exception ಠ_ಠ){}
         return null;
+    }
+    private boolean hasRequiredFood() {
+        return Variables.thieving_food_to_eat == -1 || Inventory.getItem(Variables.thieving_food_to_eat + 1) != null;
     }
 }

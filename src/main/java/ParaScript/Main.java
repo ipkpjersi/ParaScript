@@ -60,6 +60,7 @@ public class Main extends Script implements MessageListener, Paintable {
         // }
         if(Variables.skill_to_train == Skill.THIEVING) {
             strategies.add(new Thieving());
+            strategies.add(new Eat());
         }
         if(Variables.skill_to_train == Skill.ATTACK) {
             // Activate auto retaliate
