@@ -617,6 +617,7 @@ public class UI extends JFrame {
         thievingPanel.add(lblThievingMethod);
         thievingMethod.setModel(new DefaultComboBoxModel(new String[]{
                 "Drop",
+                "Bank",
         }));
         thievingMethod.setBounds(20, 80, 150, 20);
         thievingMethod.addActionListener (new ActionListener () {
