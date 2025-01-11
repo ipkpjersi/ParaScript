@@ -8,6 +8,8 @@ import org.rev317.min.api.wrappers.SceneObject;
 import org.rev317.min.api.methods.*;
 import org.rev317.min.api.wrappers.Item;
 
+import static org.rev317.min.api.methods.Bank.getBankItemIDs;
+
 public class Bank implements Strategy {
 
     @Override
@@ -69,7 +71,7 @@ public class Bank implements Strategy {
     public static int getBankSlot(int item_id){
         item_id++;
         int slot = 0;
-        for (int bank_item_id : Variables.bank_items){
+        for (int bank_item_id : getBankItemIDs()){
             if (bank_item_id == item_id) return slot;
             slot++;
         }
@@ -97,9 +99,15 @@ public class Bank implements Strategy {
     }
 
     public static void withdrawItem(int item_id, int amount){
-        if (!openBank()) return;
+        if (!openBank()) {
+            System.out.println("Bank is not open, cannot withdraw item " + item_id + " with amount " + amount);
+            return;
+        }
         int slot = getBankSlot(item_id);
-        if (slot < 0) return;
+        if (slot < 0) {
+            System.out.println("Could not find item " + item_id );
+            return;
+        }
         switch(amount){
             case 1:
                 Menu.sendAction(632, item_id, slot, 5382, 6);
