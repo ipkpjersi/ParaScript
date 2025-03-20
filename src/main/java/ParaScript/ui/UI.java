@@ -65,6 +65,11 @@ public class UI extends JFrame {
     private JComboBox prayerBoneTypeSelect = new JComboBox();
     private JComboBox prayerMethod = new JComboBox();
 
+    // Cooking
+    private JLabel lblCookingFoodID = new JLabel("Raw Food ID");
+    private JTextField cookingFoodID = new JTextField();
+    private JComboBox cookingMethod = new JComboBox();
+
     // Our colors
     private Color Color_MidnightBlue = new Color(44, 62, 80);
     private Color Color_WetAsphalt = new Color(52, 73, 94);
@@ -764,6 +769,58 @@ public class UI extends JFrame {
             }
         });
         prayerPanel.add(prayerMethod);
+
+        /*
+        * Cooking Panel
+        */
+        JPanel cookingPanel = new JPanel();
+        cookingPanel.setForeground(Color_WhiteSmoke);
+        cookingPanel.setBackground(Color_WetAsphalt);
+        tabbedPane.addTab("Cooking", cookingPanel);
+        cookingPanel.setLayout(null);
+
+        // Select raw food to cook
+        JLabel lblCookingFoodID = new JLabel("Raw Food ID");
+        lblCookingFoodID.setForeground(Color_WhiteSmoke);
+        lblCookingFoodID.setBounds(20, 20, 150, 20);
+        cookingPanel.add(lblCookingFoodID);
+
+        cookingFoodID.setBounds(20, 40, 150, 20);
+        cookingFoodID.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                // No action needed here
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                try {
+                    Variables.food_to_cook = Integer.parseInt(cookingFoodID.getText());
+                } catch (Exception ಠ_ಠ) {
+                    Variables.food_to_cook = -1; // Default value if input is invalid
+                }
+            }
+        });
+        cookingPanel.add(cookingFoodID);
+
+        // Select cooking method (e.g., Fire or Range)
+        JLabel lblCookingMethod = new JLabel("Method");
+        lblCookingMethod.setForeground(Color_WhiteSmoke);
+        lblCookingMethod.setBounds(20, 70, 150, 20);
+        cookingPanel.add(lblCookingMethod);
+
+        JComboBox cookingMethod = new JComboBox();
+        cookingMethod.setModel(new DefaultComboBoxModel(new String[]{
+                "Range"
+                //"Fire", //TODO: Implement fire cooking
+        }));
+        cookingMethod.setBounds(20, 90, 150, 20);
+        cookingMethod.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Variables.cooking_method = cookingMethod.getSelectedItem().toString();
+            }
+        });
+        cookingPanel.add(cookingMethod);
 
         /*
          * Slave Panel

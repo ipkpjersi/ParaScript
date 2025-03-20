@@ -89,6 +89,11 @@ public class Main extends Script implements MessageListener, Paintable {
         if(Variables.skill_to_train == Skill.PRAYER) {
             strategies.add(new Prayer());
         }
+        if(Variables.skill_to_train == Skill.COOKING) {
+            strategies.add(new Bank());
+            strategies.add(new Walk());
+            strategies.add(new Cook());
+        }
         
         // These strategies should always be running
         strategies.add(new Drop());

@@ -59,6 +59,10 @@ public class Variables {
     // Prayer
     public static Bones prayer_bone_type_selected = Bones.BONES;
     public static String prayer_method = "Bury";
+    
+    // Cooking
+    public static int food_to_cook = -1;
+    public static String cooking_method = "Range";
 
     // Banking
     public static int[] bank_items = new int[]{};
