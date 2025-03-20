@@ -102,19 +102,18 @@ public class Cook implements Strategy {
 
             if (Bank.isBankOpen()) {
                 if (Inventory.getCount(Variables.food_to_cook + 1) == 0) {
-					System.out.println("Need raw food, withdrawing then closing bank.");
-					Bank.depositItem(Variables.food_to_cook + 2, 10);
-					Time.sleep(() -> Bank.isBankOpen(), 1000);
-					Bank.depositItem(Variables.food_to_cook + 4, 10);
+					System.out.println("Need raw food, depositing then withdrawing then closing bank.");
+                    depositAllFood();
 					Time.sleep(() -> Bank.isBankOpen(), 2000);
-					Bank.depositItem(Variables.food_to_cook + 2, 10);
+                    depositAllFood();
 					Time.sleep(() -> Bank.isBankOpen(), 2000);
-					Bank.depositItem(Variables.food_to_cook + 2, 5);
-                    Bank.withdrawItem(Variables.food_to_cook, 10);
+                    depositAllFood();
                     Time.sleep(() -> Bank.isBankOpen(), 2000);
-                    Bank.withdrawItem(Variables.food_to_cook, 10);
+                    withdrawFood(10);
                     Time.sleep(() -> Bank.isBankOpen(), 2000);
-                    Bank.withdrawItem(Variables.food_to_cook, 5);
+                    withdrawFood(10);
+                    Time.sleep(() -> Bank.isBankOpen(), 2000);
+                    withdrawFood(5);
                     Time.sleep(() -> Inventory.getItem(Variables.food_to_cook + 1) != null, 5000);
 					System.out.println("Should have enough raw food now!");
                 } else {
@@ -134,5 +133,16 @@ public class Cook implements Strategy {
             return items[0].getSlot();
         }
         return 0;
+    }
+    
+    private void depositAllFood() {
+        //Bank all food, regardless of item IDs.
+        for (int i = 0; i <= 5; i++) {
+            Bank.depositItem(Variables.food_to_cook + i, 10);
+        }
+    }
+    
+    private void withdrawFood(int amount) {
+        Bank.withdrawItem(Variables.food_to_cook, amount);
     }
 }
