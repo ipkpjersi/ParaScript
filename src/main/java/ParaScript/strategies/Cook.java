@@ -27,7 +27,7 @@ public class Cook implements Strategy {
 			System.out.println("Cooking...");
 			return true;
 		}
-		System.out.println("Cook check passed...");
+		System.out.println("Cooking check failed, returning false...");
 		return false;
 	}
 	
