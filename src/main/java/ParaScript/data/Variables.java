@@ -212,6 +212,8 @@ public class Variables {
                 return fishing_method.equalsIgnoreCase("Bank");
             case "Thieving":
                 return thieving_method.equalsIgnoreCase("Bank");
+            case "Cooking":
+                return true;
             default:
                 return true;
         }
